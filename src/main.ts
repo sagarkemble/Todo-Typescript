@@ -37,7 +37,6 @@ const greetingsArr: string[] = [
   "Bonjour",
   "Ciao",
   "Olá",
-  "Namaste",
   "Konnichiwa",
   "Annyeong",
   "Nǐ hǎo",
@@ -77,9 +76,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (getLocalStorageData()) loadTasks();
   shuffleArray(greetingsArr);
   shuffleArray(taglinesArr);
-  console.log(greetingsArr);
-  console.log(taglinesArr);
-
   await setGreetingAndTagline();
   createIcons({ icons });
   fadeIn(document.body, 0.5);
