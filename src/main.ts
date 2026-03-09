@@ -36,7 +36,6 @@ const greetingsArr: string[] = [
   "प्रणाम",
   "Bonjour",
   "Ciao",
-  "Hallo",
   "Olá",
   "Namaste",
   "Konnichiwa",
@@ -69,11 +68,18 @@ const taglinesArr: string[] = [
   "One checkmark closer",
   "Keep moving forward",
 ];
+let grettingIndex = 0;
+let tagLineIndex = 0;
 //#endregion //*========== declaration ==========*//
 
 //#region //*========== start flow or DOM loaded listner logic ==========*//
 document.addEventListener("DOMContentLoaded", async () => {
   if (getLocalStorageData()) loadTasks();
+  shuffleArray(greetingsArr);
+  shuffleArray(taglinesArr);
+  console.log(greetingsArr);
+  console.log(taglinesArr);
+
   await setGreetingAndTagline();
   createIcons({ icons });
   fadeIn(document.body, 0.5);
@@ -188,12 +194,19 @@ function createTaskElement(id: IdType) {
 //#endregion //*========== create task ==========*//
 
 //#region //*========== heading wrapper logic ==========*//
+function shuffleArray(arr: string[]) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 async function setGreetingAndTagline() {
   await fadeOut(headingWrapper);
-  const grettingRandomNumber = Math.floor(Math.random() * greetingsArr.length);
-  const tagLineRandomNumber = Math.floor(Math.random() * taglinesArr.length);
-  greeting.innerText = `${greetingsArr[grettingRandomNumber]}`;
-  tagLine.innerText = taglinesArr[tagLineRandomNumber];
+  greeting.innerText = `${greetingsArr[grettingIndex]}`;
+  tagLine.innerText = taglinesArr[tagLineIndex];
+  grettingIndex = (grettingIndex + 1) % greetingsArr.length;
+  tagLineIndex = (tagLineIndex + 1) % taglinesArr.length;
   await fadeIn(headingWrapper);
 }
 headingWrapper.addEventListener("click", setGreetingAndTagline);
