@@ -87,7 +87,6 @@ function getLocalStorageData(): boolean {
   const localStorageData = localStorage.getItem("taskList");
   if (localStorageData) {
     taskObj = JSON.parse(localStorageData);
-    loadTasks();
     return true;
   }
   return false;
