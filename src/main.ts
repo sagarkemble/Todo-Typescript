@@ -205,6 +205,7 @@ async function setGreetingAndTagline() {
   await fadeIn(headingWrapper);
 }
 headingWrapper.addEventListener("click", setGreetingAndTagline);
+setInterval(setGreetingAndTagline, 1000 * 10);
 //#endregion //*========== heading wrapper logic ==========*//
 
 //#region //*========== document listner / keyboard listners ==========*//
