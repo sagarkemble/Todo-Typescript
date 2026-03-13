@@ -207,6 +207,23 @@ async function setGreetingAndTagline() {
 headingWrapper.addEventListener("click", setGreetingAndTagline);
 //#endregion //*========== heading wrapper logic ==========*//
 
+//#region //*========== document listner / keyboard listners ==========*//
+document.addEventListener("keydown", (e) => {
+  if (e.key === "/") {
+    e.preventDefault();
+    taskInput.focus();
+  }
+  if (e.key === "Escape") {
+    taskInput.blur();
+  }
+  if (e.key === " " && document.activeElement !== taskInput) {
+    e.preventDefault();
+    setGreetingAndTagline();
+  }
+});
+
+//#endregion //*========== document listner / keyboard listners ==========*//
+
 //#region //*========== animation functions ==========*//
 
 function fadeOut(element: HTMLElement, time = 0.2) {
